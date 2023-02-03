@@ -64,9 +64,10 @@ async def main(candle: int, before: int, size: int) -> pd.DataFrame:
         hi = [int(price[2]) for price in data]
         lo = [int(price[3]) for price in data]
         cl = [int(price[4]) for price in data]
+        volume = [int(price[5]) for price in data]
         date_datetime = map(datetime.datetime.fromtimestamp, date)
         dti = pd.DatetimeIndex(date_datetime)
-        df = pd.DataFrame({"op" : op, "hi" : hi, "lo": lo, "cl" : cl}, index=dti)
+        df = pd.DataFrame({"op" : op, "hi" : hi, "lo": lo, "cl" : cl, "volume" : volume}, index=dti)
         
         return df
 
