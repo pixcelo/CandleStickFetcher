@@ -12,7 +12,7 @@ client = Client(api_key, api_secret)
 
 symbol = 'BTCUSDT'
 # https://python-binance-jp.readthedocs.io/ja/latest/enums.html
-interval = Client.KLINE_INTERVAL_1MINUTE
+interval = Client.KLINE_INTERVAL_30MINUTE
 limit = 500
 start_date = '2022-01-01'
 end_date = '2023-02-18'
@@ -42,11 +42,12 @@ while start_time < end_time:
 
 df = df[['timestamp', 'op', 'hi', 'lo', 'cl', 'volume']] # カラムを修正する
 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='ms')
+df.set_index('timestamp', inplace=True)
 print(df)
 
 # ループをbreakで抜けた後に、CSVとPickle形式でデータフレームを保存する
 if not df.empty:
-    df.to_csv('df_ohlcv.csv', index=False)
+    df.to_csv('df_ohlcv.csv', index=True)
     with open('df_ohlcv.pkl', 'wb') as f:
         pickle.dump(df, f)
 

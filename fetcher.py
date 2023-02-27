@@ -37,7 +37,7 @@ async def main(candle: int, before: int, size: int) -> pd.DataFrame:
         date_datetime = map(datetime.datetime.fromtimestamp, date)
         dti = pd.DatetimeIndex(date_datetime)
         df = pd.DataFrame({"op" : op, "hi" : hi, "lo": lo, "cl" : cl, "volume" : volume}, index=dti)
-        
+        print(df)
         return df
 
 
